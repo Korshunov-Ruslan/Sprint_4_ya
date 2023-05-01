@@ -22,7 +22,6 @@
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-
         <!-- Зависимость для драйвера Chrome -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
