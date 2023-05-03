@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class OrderSamokat {
     private final WebDriver driver;
+    private final static String orderMadeText = "Заказ оформлен";
     private final By orderButtonHeader = By.className("Button_Button__ra12g");
     private final By orderButtonMiddle = By.xpath("//div[@class='Home_FinishButton__1_cWm']/button");
     private final By nameField = By.xpath("//input[@placeholder='* Имя']");
@@ -19,16 +20,13 @@ public class OrderSamokat {
     private final By durationOrderField = By.xpath("//div[@class='Dropdown-root']");
     private final By makeOrderButton = By.xpath("//div[@class='Order_Buttons__1xGrp']/button[2]");
     private final By yesInDialog = By.xpath("//*[@id=\"root\"]/div/div[2]/div[5]/div[2]/button[2]");
-    private final By confirmationMessage = By.className("Order_ModalHeader__3FDaJ");
+    private final By confirmationDialog = By.xpath("//*[contains(text(),'Заказ оформлен')]");
 
     public OrderSamokat(WebDriver driver){
         this.driver = driver;
     }
     public void clickOrderButtonHeader(){
         driver.findElement(orderButtonHeader).click();
-    }
-    public void confirmCookies() {
-        driver.findElement(By.id("rcc-confirm-button")).click();
     }
     public void scrollToSecondOrderButton(){
         WebElement element = driver.findElement(orderButtonMiddle);
@@ -73,9 +71,14 @@ public class OrderSamokat {
     public void clickYesInDialog() {
         driver.findElement(yesInDialog).click();
     }
-    public Boolean isPanelVisible() {
-        return driver.findElement(confirmationMessage).isDisplayed();
+    public String getTextOrderConfirmationWindow() {
+        return driver.findElement(confirmationDialog).getText();
     }
+    public boolean isTextContainsOrderMadeText(){
+        String actualText = getTextOrderConfirmationWindow();
+        return actualText.contains(orderMadeText);
+    }
+
     public void createOrder(String username, String surname, String address, String phone){
         setUsername(username);
         setSurname(surname);
