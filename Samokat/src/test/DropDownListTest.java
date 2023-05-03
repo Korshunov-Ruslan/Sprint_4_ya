@@ -8,12 +8,13 @@ import org.junit.Assert;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import DropDownList.DropDownList;
+import dropsa.DropDownList;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.support.ui.Sleeper;
 
 @RunWith(Parameterized.class)
 public class DropDownListTest {
+    private final String url = "https://qa-scooter.praktikum-services.ru";
     private final int accordionIndex;
     private final int panelIndex;
     private final String expectedText;
@@ -52,13 +53,13 @@ public class DropDownListTest {
         WebDriverManager.chromedriver().setup();
         this.driver = new ChromeDriver();
         // переход на страницу тестового приложения
-        driver.get("https://qa-scooter.praktikum-services.ru");
+        driver.get(url);
         // создай объект класса главной страницы приложения
         this.objDropDownList = new DropDownList(driver);
     }
 
     @Test
-    public void testThatTextIsCorrect(){
+    public void checkThatTextInDropDownsIsCorrect(){
         objDropDownList.scrollToElement(accordionIndex);
         objDropDownList.clickDropDownList(accordionIndex);
         String actualText = objDropDownList.getTextOfDropDown(panelIndex);

@@ -16,6 +16,7 @@ public class SamokatOrderTest {
 
     OrderSamokat objOrderSamokat;
     WebDriver driver;
+    private final String url = "https://qa-scooter.praktikum-services.ru";
     private final String username;
     private final String surname;
     private final String address;
@@ -43,7 +44,7 @@ public class SamokatOrderTest {
         WebDriverManager.chromedriver().setup();
         this.driver = new ChromeDriver();
         // переход на страницу тестового приложения
-        driver.get("https://qa-scooter.praktikum-services.ru");
+        driver.get(url);
         // создай объект класса главной страницы приложения
         this.objOrderSamokat = new OrderSamokat(driver);
     }

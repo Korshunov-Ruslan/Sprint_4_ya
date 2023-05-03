@@ -19,7 +19,7 @@ public class OrderSamokat {
     private final By durationOrderField = By.xpath("//div[@class='Dropdown-root']");
     private final By makeOrderButton = By.xpath("//div[@class='Order_Buttons__1xGrp']/button[2]");
     private final By yesInDialog = By.xpath("//*[@id=\"root\"]/div/div[2]/div[5]/div[2]/button[2]");
-        private final By confirmationDialog = By.className("Order_Modal__YZ-d3");
+    private final By confirmationMessage = By.className("Order_ModalHeader__3FDaJ");
 
     public OrderSamokat(WebDriver driver){
         this.driver = driver;
@@ -74,7 +74,7 @@ public class OrderSamokat {
         driver.findElement(yesInDialog).click();
     }
     public Boolean isPanelVisible() {
-        return driver.findElement(confirmationDialog).isDisplayed();
+        return driver.findElement(confirmationMessage).isDisplayed();
     }
     public void createOrder(String username, String surname, String address, String phone){
         setUsername(username);

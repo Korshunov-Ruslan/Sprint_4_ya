@@ -1,4 +1,4 @@
-package DropDownList;
+package dropdownlist;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
