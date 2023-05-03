@@ -7,28 +7,27 @@ import org.junit.runner.RunWith;
 import org.junit.Assert;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import samokat.OrderSamokat;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @RunWith(Parameterized.class)
 public class SamokatOrderTest {
-
     OrderSamokat objOrderSamokat;
     WebDriver driver;
-    private final static String url = "https://qa-scooter.praktikum-services.ru";
     private final String username;
     private final String surname;
     private final String address;
     private final String phonenumber;
-    private final boolean isPopUpVisiable;
+    private final boolean isOrderMadeTextVisiable;
 
-    public SamokatOrderTest(String username, String surname, String address, String phonenumber, boolean isPopUpVisiable) {
+    public SamokatOrderTest(String username, String surname, String address, String phonenumber,
+                            boolean isOrderMadeTextVisiable) {
         this.username = username;
         this.surname = surname;
         this.address = address;
         this.phonenumber = phonenumber;
-        this.isPopUpVisiable = isPopUpVisiable;
+        this.isOrderMadeTextVisiable = isOrderMadeTextVisiable;
 
     }
     @Parameterized.Parameters()
@@ -41,9 +40,10 @@ public class SamokatOrderTest {
 
     @Before
     public void before() {
-        WebDriverManager.chromedriver().setup();
-        this.driver = new ChromeDriver();
+        WebDriverManager.firefoxdriver().setup();
+        this.driver = new FirefoxDriver();
         // переход на страницу тестового приложения
+        String url = "https://qa-scooter.praktikum-services.ru";
         driver.get(url);
         // создай объект класса главной страницы приложения
         this.objOrderSamokat = new OrderSamokat(driver);
@@ -53,7 +53,7 @@ public class SamokatOrderTest {
     public void orderPositive() {
         objOrderSamokat.clickOrderButtonHeader();
         objOrderSamokat.createOrder(username, surname, address, phonenumber);
-        Assert.assertEquals(isPopUpVisiable, objOrderSamokat.isPanelVisible());
+        Assert.assertEquals(isOrderMadeTextVisiable, objOrderSamokat.isTextContainsOrderMadeText());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class SamokatOrderTest {
         objOrderSamokat.scrollToSecondOrderButton();
         objOrderSamokat.clickSecondOrderButton();
         objOrderSamokat.createOrder(username, surname, address, phonenumber);
-        Assert.assertEquals(isPopUpVisiable, objOrderSamokat.isPanelVisible());
+        Assert.assertEquals(isOrderMadeTextVisiable, objOrderSamokat.isTextContainsOrderMadeText());
     }
 
     @After
