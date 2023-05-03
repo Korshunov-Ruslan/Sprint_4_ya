@@ -16,7 +16,7 @@ public class SamokatOrderTest {
 
     OrderSamokat objOrderSamokat;
     WebDriver driver;
-    private final String url = "https://qa-scooter.praktikum-services.ru";
+    private final static String url = "https://qa-scooter.praktikum-services.ru";
     private final String username;
     private final String surname;
     private final String address;

@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.Sleeper;
 
 @RunWith(Parameterized.class)
 public class DropDownListTest {
-    private final String url = "https://qa-scooter.praktikum-services.ru";
+    private final static String url = "https://qa-scooter.praktikum-services.ru";
     private final int accordionIndex;
     private final int panelIndex;
     private final String expectedText;
