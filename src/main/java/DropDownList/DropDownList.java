@@ -14,7 +14,11 @@ public class DropDownList {
     private final String accordionPanelLocator = "accordion__panel-";
 
     public void clickDropDownList(int index){
-        driver.findElement(By.id(accordionLocator + index));
+        driver.findElement(By.id(accordionLocator + index)).click();
+    }
+    public void scrollToElement(int index){
+        WebElement element = driver.findElement(By.id(accordionLocator + index));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
     public String getTextOfDropDown(int index){
         return driver.findElement(By.id(accordionPanelLocator + index)).getText();

@@ -49,15 +49,16 @@ public class DropDownListTest {
     @Before
     public void before() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        this.driver = new ChromeDriver();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru");
         // создай объект класса главной страницы приложения
-        DropDownList objDropDownList = new DropDownList(driver);
+        this.objDropDownList = new DropDownList(driver);
     }
 
     @Test
     public void testThatTextIsCorrect(){
+        objDropDownList.scrollToElement(accordionIndex);
         objDropDownList.clickDropDownList(accordionIndex);
         String actualText = objDropDownList.getTextOfDropDown(panelIndex);
         Assert.assertEquals(expectedText, actualText);

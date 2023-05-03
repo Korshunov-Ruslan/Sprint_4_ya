@@ -17,9 +17,9 @@ public class OrderSamokat {
     private final By nextButton = By.xpath("//div[@class='Order_NextButton__1_rCA']/button");
     private final By deliveryDateField = By.xpath("//div[@class = 'react-datepicker__input-container']/input");
     private final By durationOrderField = By.xpath("//div[@class='Dropdown-root']");
-    private final By orderScooterButton = By.xpath("//div[@class='Order_Buttons__1xGrp']/button[2]");
-    private final By yesInDialog = By.xpath("//div[@class = 'Order_Modal__YZ-d3']");
-    private final By confirmationDialog = By.className("Order_Modal__YZ-d3");
+    private final By makeOrderButton = By.xpath("//div[@class='Order_Buttons__1xGrp']/button[2]");
+    private final By yesInDialog = By.xpath("//*[@id=\"root\"]/div/div[2]/div[5]/div[2]/button[2]");
+        private final By confirmationDialog = By.className("Order_Modal__YZ-d3");
 
     public OrderSamokat(WebDriver driver){
         this.driver = driver;
@@ -27,12 +27,12 @@ public class OrderSamokat {
     public void clickOrderButtonHeader(){
         driver.findElement(orderButtonHeader).click();
     }
-    public void confirmCookies() {
-        driver.findElement(By.id("rcc-confirm-button")).click();
-    }
     public void scrollToSecondOrderButton(){
         WebElement element = driver.findElement(orderButtonMiddle);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+    public void clickSecondOrderButton(){
+        driver.findElement(orderButtonMiddle).click();
     }
     public void setUsername(String username){
         driver.findElement(nameField).sendKeys(username);
@@ -65,7 +65,7 @@ public class OrderSamokat {
         driver.findElement(By.xpath("//div[@class='Dropdown-menu']/div")).click();
     }
     public void clickOrderScooterButton() {
-        driver.findElement(orderScooterButton).click();
+        driver.findElement(makeOrderButton).click();
     }
     public void clickYesInDialog() {
         driver.findElement(yesInDialog).click();
@@ -82,7 +82,7 @@ public class OrderSamokat {
         clickNextButton();
         setDeliveryDate();
         setDurationOrder();
-        clickOrderButtonHeader();
+        clickOrderScooterButton();
         clickYesInDialog();
     }
 }
